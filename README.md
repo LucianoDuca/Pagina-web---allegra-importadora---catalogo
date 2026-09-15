@@ -94,7 +94,7 @@ Requiere Node.js 20 o más nuevo (en esta PC hay uno portátil en `C:\Users\luci
 No instala nada: no tiene dependencias.
 
 ```bash
-npm test      # 40 pruebas: lógica, lectura de Supabase, seguridad de los archivos publicados
+npm test      # 43 pruebas: lógica, lectura de Supabase, seguridad de los archivos publicados, publicación en Vercel
 npm run dev   # la página con un Supabase simulado y productos inventados: http://localhost:5178
 ```
 
@@ -125,15 +125,17 @@ El simulador nunca toca el Supabase real. Tiene modos para ver cada situación: 
 ## Estructura
 
 ```
+vercel.json          qué publica Vercel (carpeta sitio), comando de build y encabezados de seguridad
 sitio/               lo que se publica
   index.html         la página
-  config.js          URL de Supabase, clave pública y WhatsApp de respaldo (único archivo a tocar)
+  config.js          URL de Supabase, clave pública y WhatsApp de respaldo (en Vercel la clave se pone sola)
   _headers           encabezados de seguridad y caché (Cloudflare Pages y Netlify los leen solos)
   css/estilos.css    estilos (mismos colores que el programa)
   js/app.js          interfaz
   js/datos.js        lectura de Supabase
   js/logica.js       búsqueda, filtros, precios, WhatsApp (sin DOM, probado aparte)
   img/               logo e ícono
-tools/               servidor de prueba con Supabase simulado y datos inventados
+tools/               servidor de prueba con Supabase simulado y datos inventados;
+                     generar-config.js arma config.js con la variable SUPABASE_PUBLISHABLE_KEY al publicar
 tests/               pruebas automáticas
 ```
