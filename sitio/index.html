@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://*.supabase.co; connect-src 'self' https://*.supabase.co; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <title>Allegra Importadora · Catálogo de productos</title>
+  <meta name="description" content="Catálogo de productos y precios de Allegra Importadora, Mendoza. Buscá lo que necesitás y consultanos por WhatsApp.">
+  <meta name="theme-color" content="#D93B33">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_AR">
+  <meta property="og:title" content="Allegra Importadora · Catálogo de productos">
+  <meta property="og:description" content="Precios en efectivo y transferencia. Consultanos por WhatsApp.">
+  <link rel="icon" type="image/png" href="img/icono.png">
+  <link rel="apple-touch-icon" href="img/icono.png">
+  <link rel="stylesheet" href="css/estilos.css">
+  <script src="config.js"></script>
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+  <a class="saltar" href="#resultados">Ir a los productos</a>
+
+  <header class="cabecera">
+    <div class="contenedor cabecera-in">
+      <a class="marca" href="./">
+        <img src="img/logo.png" alt="" width="52" height="58">
+        <span class="marca-txt">
+          <strong id="nombre-negocio">Allegra Importadora</strong>
+          <small>Catálogo de productos</small>
+        </span>
+      </a>
+      <a class="btn btn-wa" id="wa-cabecera" href="#" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp" hidden>
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/><path d="M16.6 14.1c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.3-.4.8-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3Z"/></svg>
+        <span>Escribinos</span>
+      </a>
+    </div>
+  </header>
+
+  <section class="intro">
+    <div class="contenedor">
+      <h1>Catálogo de productos</h1>
+      <p>Buscá lo que necesitás, mirá los precios en efectivo y transferencia, y consultanos por WhatsApp.</p>
+    </div>
+  </section>
+
+  <div class="centinela" id="centinela" aria-hidden="true"></div>
+  <div class="barra" id="barra">
+    <div class="contenedor barra-in">
+      <label class="buscador">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="buscar" type="search" placeholder="Buscar por nombre o código…" autocomplete="off" enterkeyhint="search" maxlength="100" aria-label="Buscar productos">
+        <button class="limpiar" id="limpiar" type="button" aria-label="Borrar la búsqueda" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </label>
+      <nav class="chips" id="categorias" aria-label="Categorías" hidden></nav>
+    </div>
+  </div>
+
+  <main class="contenedor principal" id="resultados" tabindex="-1">
+    <div class="aviso" id="aviso" role="status" hidden>
+      <span id="aviso-texto"></span>
+      <button class="btn btn-sec btn-chico" id="aviso-reintentar" type="button">Actualizar</button>
+    </div>
+
+    <div class="opciones" id="opciones" hidden>
+      <span class="contador" id="contador" aria-live="polite"></span>
+      <label class="check"><input type="checkbox" id="solo-stock"> Solo con stock</label>
+      <label class="orden">Ordenar
+        <select id="orden">
+          <option value="nombre">A–Z</option>
+          <option value="menor">Menor precio</option>
+          <option value="mayor">Mayor precio</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="grilla" id="grilla" aria-busy="true"></div>
+    <button class="btn btn-sec ver-mas" id="ver-mas" type="button" hidden>Ver más productos</button>
+
+    <div class="panel" id="vacio" hidden>
+      <div class="panel-icono">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </div>
+      <h2 id="vacio-titulo"></h2>
+      <p id="vacio-texto"></p>
+      <div class="acciones">
+        <button class="btn btn-primario" id="ver-todos" type="button">Ver todo el catálogo</button>
+        <a class="btn btn-wa" id="vacio-wa" href="#" target="_blank" rel="noopener" hidden>Consultar por WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="panel" id="error" role="alert" hidden>
+      <div class="panel-icono">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.5v.01"/></svg>
+      </div>
+      <h2 id="error-titulo"></h2>
+      <p id="error-texto"></p>
+      <div class="acciones">
+        <button class="btn btn-primario" id="reintentar" type="button">Reintentar</button>
+        <a class="btn btn-wa" id="error-wa" href="#" target="_blank" rel="noopener" hidden>Escribinos por WhatsApp</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor pie-cols">
+      <div>
+        <strong class="pie-nombre" id="pie-nombre">Allegra Importadora</strong>
+        <p>Precios en pesos argentinos, para pago en efectivo o transferencia.</p>
+      </div>
+      <div>
+        <h2>Contacto</h2>
+        <p id="pie-tel" hidden></p>
+        <p><a id="pie-wa" href="#" target="_blank" rel="noopener" hidden>Escribinos por WhatsApp</a></p>
+        <p><a id="pie-dir" href="#" target="_blank" rel="noopener" hidden></a></p>
+      </div>
+      <div>
+        <h2>A tener en cuenta</h2>
+        <p>Los precios pueden cambiar sin previo aviso y el stock está sujeto a disponibilidad. Consultanos antes de venir.</p>
+      </div>
+    </div>
+    <div class="contenedor pie-legal">© <span id="anio"></span> Allegra Importadora</div>
+  </footer>
+
+  <dialog class="detalle" id="detalle" aria-labelledby="det-nombre">
+    <div class="det">
+      <button class="det-cerrar" id="det-cerrar" type="button" aria-label="Cerrar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+      <div class="det-foto" id="det-foto"></div>
+      <div class="det-info">
+        <span class="det-cat" id="det-cat"></span>
+        <h2 class="det-nombre" id="det-nombre"></h2>
+        <div class="det-precios" id="det-precios"></div>
+        <p class="det-stock" id="det-stock"></p>
+        <div class="det-acciones">
+          <a class="btn btn-wa" id="det-wa" href="#" target="_blank" rel="noopener" hidden>
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/><path d="M16.6 14.1c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.3-.4.8-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3Z"/></svg>
+            Consultar por WhatsApp
+          </a>
+          <button class="btn btn-sec" id="det-compartir" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>
+            <span id="det-compartir-txt">Compartir</span>
+          </button>
+        </div>
+        <p class="det-nota">Precios en pesos. Pueden cambiar sin previo aviso.</p>
+      </div>
+    </div>
+  </dialog>
+
+  <template id="tpl-tarjeta">
+    <article class="tarjeta">
+      <button class="tarjeta-abrir" type="button">
+        <span class="tarjeta-foto"></span>
+        <span class="tarjeta-info">
+          <span class="tarjeta-cat"></span>
+          <span class="tarjeta-nombre"></span>
+          <span class="tarjeta-precios"></span>
+        </span>
+      </button>
+      <div class="tarjeta-pie">
+        <span class="stock"></span>
+        <a class="consultar" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/><path d="M16.6 14.1c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.3-.4.8-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3Z"/></svg>
+          <span>Consultar</span>
+        </a>
+      </div>
+    </article>
+  </template>
+
+  <template id="tpl-sin-foto">
+    <span class="sin-foto" role="img" aria-label="Sin foto">
+      <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6v9M30 6v9"/><path d="M13 15h22v7a11 11 0 0 1-22 0z"/><path d="M24 33v5a5 5 0 0 1-5 5h-3"/></svg>
+    </span>
+  </template>
+
+  <noscript><p class="panel">Para ver el catálogo activá JavaScript en tu navegador.</p></noscript>
+</body>
+</html>

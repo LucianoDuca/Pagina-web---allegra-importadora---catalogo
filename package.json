@@ -1,0 +1,15 @@
+{
+  "name": "allegra-web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Página web del catálogo de Allegra Importadora (lee productos y precios de Supabase)",
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "dev": "node tools/servidor-prueba.js",
+    "build": "node tools/generar-config.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
